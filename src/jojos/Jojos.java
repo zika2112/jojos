@@ -40,27 +40,27 @@ public class Jojos {
 					switch (opciones) {
 
 					case 1:
-						Metodos.mostrartabla1(conexion);
+						Metodos.mostrarTabla1(conexion);
 						System.out.println();
 						break;
 
 					case 2:
-						Metodos.mostrartabla2(conexion);
+						Metodos.mostrarTabla2(conexion);
 						System.out.println();
 						break;
 
 					case 3:
-						Metodos.mostrartabla3(conexion);
+						Metodos.mostrarTabla3(conexion);
 						System.out.println();
 						break;
 
 					case 4:
-						Metodos.mostrartabla4(conexion);
+						Metodos.mostrarTabla4(conexion);
 						System.out.println();
 						break;
 
 					case 5:
-						Metodos.mostrartabla5(conexion);
+						Metodos.mostrarTabla5(conexion);
 						System.out.println();
 						break;
 					}

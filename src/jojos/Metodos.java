@@ -26,7 +26,7 @@ public class Metodos {
 		
 	}
 	
-	public static void mostrartabla1(Connection conexion) throws SQLException {
+	public static void mostrarTabla1(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM Joestar ";
 
@@ -49,7 +49,7 @@ public class Metodos {
 
 	}
 
-	public static void mostrartabla2(Connection conexion) throws SQLException {
+	public static void mostrarTabla2(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM amigo ";
 
@@ -73,7 +73,7 @@ public class Metodos {
 
 	}
 
-	public static void mostrartabla3(Connection conexion) throws SQLException {
+	public static void mostrarTabla3(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM enemigos ";
 
@@ -96,7 +96,7 @@ public class Metodos {
 
 	}
 
-	public static void mostrartabla4(Connection conexion) throws SQLException {
+	public static void mostrarTabla4(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM parte ";
 
@@ -118,7 +118,7 @@ public class Metodos {
 
 	}
 
-	public static void mostrartabla5(Connection conexion) throws SQLException {
+	public static void mostrarTabla5(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM stand ";
 
@@ -136,6 +136,28 @@ public class Metodos {
 
 			System.out.printf("%3d%34s%42s%n", res.getInt(1), res.getString(2)+"  ", res.getString(3));
 		}
+		
+	}
+	public static void mostrarVariasTablas(Connection conexion) throws SQLException {
 
+		String consulta = "SELECT * FROM enemigos ";
+
+		PreparedStatement ps = conexion.prepareStatement(consulta);
+		ResultSet res = ps.executeQuery();
+		ResultSetMetaData rmd = res.getMetaData();
+
+		System.out.printf("%3s%28s%39s%51s%49s%51s%n", rmd.getColumnName(1), rmd.getColumnName(2), rmd.getColumnName(3),
+				rmd.getColumnName(4), rmd.getColumnName(5), rmd.getColumnName(6));
+		
+		for (int i = 0; i < 3 + 30 + 40 + 50 + 50 + 50; i++)
+			System.out.print("=");
+		System.out.println();
+
+		while (res.next()) {
+
+			System.out.printf("%3d%30s%40s%50s%50s%50s%n", res.getInt(1), res.getString(2), res.getString(3),
+					res.getString(4), res.getString(5), res.getString(6));
+		}
+		
 	}
 }
