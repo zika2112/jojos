@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Jojos {
 
 	public static void main(String[] args) {
-
+		
 		String bbdd = "jojo";
 		String user = "root";
 		String password = "";
@@ -62,6 +62,17 @@ public class Jojos {
 					case 5:
 						Metodos.mostrarTabla5(conexion);
 						System.out.println();
+						break;
+						
+					case 6:
+						Metodos.mostrarVariasTablas(conexion, input);
+						break;
+					case 7:
+						Metodos.insertarEnTabla(conexion, input);
+						break;
+					case 8:
+						break;
+					case 9:
 						break;
 					}
 				}
