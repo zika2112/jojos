@@ -46,18 +46,22 @@ public class Jojos {
 
 					case 2:
 						Metodos.mostrartabla2(conexion);
+						System.out.println();
 						break;
 
 					case 3:
 						Metodos.mostrartabla3(conexion);
+						System.out.println();
 						break;
 
 					case 4:
 						Metodos.mostrartabla4(conexion);
+						System.out.println();
 						break;
 
 					case 5:
 						Metodos.mostrartabla5(conexion);
+						System.out.println();
 						break;
 					}
 				}

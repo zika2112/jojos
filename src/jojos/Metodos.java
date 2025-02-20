@@ -51,7 +51,7 @@ public class Metodos {
 
 	public static void mostrartabla2(Connection conexion) throws SQLException {
 
-		String consulta = "SELECT * FROM Joestar ";
+		String consulta = "SELECT * FROM amigo ";
 
 		PreparedStatement ps = conexion.prepareStatement(consulta);
 		ResultSet res = ps.executeQuery();
@@ -75,7 +75,7 @@ public class Metodos {
 
 	public static void mostrartabla3(Connection conexion) throws SQLException {
 
-		String consulta = "SELECT * FROM Joestar ";
+		String consulta = "SELECT * FROM enemigos ";
 
 		PreparedStatement ps = conexion.prepareStatement(consulta);
 		ResultSet res = ps.executeQuery();
@@ -98,23 +98,21 @@ public class Metodos {
 
 	public static void mostrartabla4(Connection conexion) throws SQLException {
 
-		String consulta = "SELECT * FROM Joestar ";
+		String consulta = "SELECT * FROM parte ";
 
 		PreparedStatement ps = conexion.prepareStatement(consulta);
 		ResultSet res = ps.executeQuery();
 		ResultSetMetaData rmd = res.getMetaData();
 
-		System.out.printf("%3s%28s%39s%51s%49s%51s%n", rmd.getColumnName(1), rmd.getColumnName(2), rmd.getColumnName(3),
-				rmd.getColumnName(4), rmd.getColumnName(5), rmd.getColumnName(6));
+		System.out.printf("%3s%28s%n", rmd.getColumnName(1), rmd.getColumnName(2));
 		
-		for (int i = 0; i < 3 + 30 + 40 + 50 + 50 + 50; i++)
+		for (int i = 0; i < 3 + 30 ; i++)
 			System.out.print("=");
 		System.out.println();
 
 		while (res.next()) {
 
-			System.out.printf("%3d%30s%40s%50s%50s%50s%n", res.getInt(1), res.getString(2), res.getString(3),
-					res.getString(4), res.getString(5), res.getString(6));
+			System.out.printf("%3d%30s%n", res.getInt(1), res.getString(2));
 		}
 
 
@@ -122,23 +120,21 @@ public class Metodos {
 
 	public static void mostrartabla5(Connection conexion) throws SQLException {
 
-		String consulta = "SELECT * FROM Joestar ";
+		String consulta = "SELECT * FROM stand ";
 
 		PreparedStatement ps = conexion.prepareStatement(consulta);
 		ResultSet res = ps.executeQuery();
 		ResultSetMetaData rmd = res.getMetaData();
 
-		System.out.printf("%3s%28s%39s%51s%49s%51s%n", rmd.getColumnName(1), rmd.getColumnName(2), rmd.getColumnName(3),
-				rmd.getColumnName(4), rmd.getColumnName(5), rmd.getColumnName(6));
+		System.out.printf("%3s%28s%39s%n", rmd.getColumnName(1), rmd.getColumnName(2), rmd.getColumnName(3));
 		
-		for (int i = 0; i < 3 + 30 + 40 + 50 + 50 + 50; i++)
+		for (int i = 0; i < 3 + 30 + 40 + 6; i++)
 			System.out.print("=");
 		System.out.println();
 
 		while (res.next()) {
 
-			System.out.printf("%3d%30s%40s%50s%50s%50s%n", res.getInt(1), res.getString(2), res.getString(3),
-					res.getString(4), res.getString(5), res.getString(6));
+			System.out.printf("%3d%34s%42s%n", res.getInt(1), res.getString(2)+"  ", res.getString(3));
 		}
 
 	}
