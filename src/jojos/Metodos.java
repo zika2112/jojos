@@ -26,10 +26,6 @@ public class Metodos {
 		
 	}
 	
-		
-	
-	
-	
 	public static void mostrarTabla1(Connection conexion) throws SQLException {
 
 		String consulta = "SELECT * FROM Joestar ";
@@ -202,117 +198,373 @@ public class Metodos {
 		System.out.println(menuInsertT);
 		System.out.print("Elige una tabla: ");
 		int opcion = input.nextInt();
-		
+		input.nextLine();
+
 		switch (opcion) {
-		
+
 		case 1:
-			consulta = "INSERT INTO Joestar(parte,nombre,apellido,edad,habilidad,poder) "
-						+ "VALUES (?,?,?,?,?,?)";
-			
+			consulta = "INSERT INTO Joestar(parte,nombre,apellido,edad,habilidad,poder) " + "VALUES (?,?,?,?,?,?)";
+
 			PreparedStatement ps = conexion.prepareStatement(consulta);
-			
-			
-			String pregunta = " ";
-			String continuar = new String();
-			
+			System.out.println("¿La información que vas a agregar esta entre la parte (1-7)?  (SI/NO)");
+
+			String pregunta = input.nextLine().toLowerCase();
+			boolean seguir = false;
+
 			do {
-				System.out.println("¿La informacion que vas a agregar esta entre la parte 1-6 de jojos?  (S/N)");
-				pregunta = input.nextLine();
-				
-			if(pregunta.equals("n")) {
-				
-				System.out.println("Indica la parte que de la cual es la informacion para poder agregar la: ");
-				int agregarPart =input.nextInt();
-				input.nextLine();
-				System.out.println(" ");
-				
-				System.out.println("Cola el nombre de la parte que quieres agregar");
-				String agregarNombrePart = input.nextLine();
-				
-				ps.setInt(1, agregarPart);
-				ps.setString(2, agregarNombrePart);
-				
-				ps.executeUpdate();
-				ps.clearParameters();
-				
-				System.out.println("Ahora puedes agregar la informacion sin problemas. ");
-				
-			}else if (pregunta.equals("s")) {
-				System.out.println("Vamos a agregar los dato entonces. ");
-				
-			}else {
-				System.out.println("La opcion no es valida vuelve a intentar");
-			}
-				
-			}while(pregunta!="s" && pregunta!="n");
-			
-			
+				if (pregunta.equals("no")) {
+
+					String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+					PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+					System.out.println(
+							"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+					int agregarPart = input.nextInt();
+					input.nextLine();
+
+					System.out.println("Coloca el nombre de la parte que quieres agregar");
+					String agregarNombrePart = input.nextLine();
+
+					ps1.setInt(1, agregarPart);
+					ps1.setString(2, agregarNombrePart);
+
+					ps1.executeUpdate();
+					ps1.clearParameters();
+
+					System.out.println("Ahora puedes agregar la informacion sin problemas. ");
+					seguir = true;
+
+				} else if (pregunta.equals("si")) {
+					System.out.println("Vamos a agregar los datos entonces. ");
+					seguir = true;
+				} else {
+					System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+				}
+
+			} while (seguir != true);
+
 			System.out.println(" ");
 			System.out.println("Introduce el numero de la parte: ");
 			int parte = input.nextInt();
 			input.nextLine();
-			
+
 			System.out.println("Introduce el nombre: ");
 			String nombre = input.nextLine();
-			
-			
+
 			System.out.println("Introduce el apellido: ");
 			String apellido = input.nextLine();
-			
-			
+
 			System.out.println("Introduce el valor de la edad: ");
 			int edad = input.nextInt();
 			input.nextLine();
-			
+
 			System.out.println("Introduce el nombre de la habilidad ");
 			String habilidad = input.nextLine();
-			
-			
+
 			System.out.println("Introduce el poder de la habilidad: ");
 			String poder = input.nextLine();
-			
-			
+
 			ps.setInt(1, parte);
 			ps.setString(2, nombre);
 			ps.setString(3, apellido);
 			ps.setInt(4, edad);
 			ps.setString(5, habilidad);
 			ps.setString(6, poder);
-			
+
 			ps.executeUpdate();
 			ps.clearParameters();
-			
-			break;	
+
+			break;
 		case 2:
-			consulta = "INSERT INTO amigo(parte,nombre,apellido,edad,habilidad,poder) "
-					+ "VALUES (?,?,?,?,?,?)";
+			consulta = "INSERT INTO amigo(parte,nombre,apellido,edad,habilidad,poder) " + "VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps2 = conexion.prepareStatement(consulta);
-			ResultSet res2 = ps2.executeQuery();
-			
+			System.out.println("¿La información que vas a agregar esta entre la parte (1-7)?  (SI/NO)");
+
+			String pregunta1 = input.nextLine().toLowerCase();
+			boolean seguir1 = false;
+
+			do {
+				if (pregunta1.equals("no")) {
+
+					String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+					PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+					System.out.println(
+							"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+					int agregarPart = input.nextInt();
+					input.nextLine();
+
+					System.out.println("Coloca el nombre de la parte que quieres agregar");
+					String agregarNombrePart = input.nextLine();
+
+					ps1.setInt(1, agregarPart);
+					ps1.setString(2, agregarNombrePart);
+
+					ps1.executeUpdate();
+					ps1.clearParameters();
+
+					System.out.println("Ahora puedes agregar la informacion sin problemas. ");
+					seguir1 = true;
+
+				} else if (pregunta1.equals("si")) {
+					System.out.println("Vamos a agregar los datos entonces. ");
+					seguir1 = true;
+				} else {
+					System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+				}
+
+			} while (seguir1 != true);
+
+			System.out.println(" ");
+			System.out.println("Introduce el numero de la parte: ");
+			int parte1 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre: ");
+			String nombre1 = input.nextLine();
+
+			System.out.println("Introduce el apellido: ");
+			String apellido1 = input.nextLine();
+
+			System.out.println("Introduce el valor de la edad: ");
+			int edad1 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre de la habilidad ");
+			String habilidad1 = input.nextLine();
+
+			System.out.println("Introduce el poder de la habilidad: ");
+			String poder1 = input.nextLine();
+
+			ps2.setInt(1, parte1);
+			ps2.setString(2, nombre1);
+			ps2.setString(3, apellido1);
+			ps2.setInt(4, edad1);
+			ps2.setString(5, habilidad1);
+			ps2.setString(6, poder1);
+
+			ps2.executeUpdate();
+			ps2.clearParameters();
+
 			break;
 		case 3:
-			consulta = "INSERT INTO enemigo(parte,nombre,apellido,edad,habilidad,poder) "
-					+ "VALUES (?,?,?,?,?,?)";
+			consulta = "INSERT INTO enemigos(parte,nombre,apellido,edad,habilidad,poder) " + "VALUES (?,?,?,?,?,?)";
 			PreparedStatement ps3 = conexion.prepareStatement(consulta);
-			ResultSet res3 = ps3.executeQuery();
-			
+			System.out.println("¿La información que vas a agregar esta entre la parte (1-7)?  (SI/NO)");
+
+			String pregunta2 = input.nextLine().toLowerCase();
+			boolean seguir2 = false;
+
+			do {
+				if (pregunta2.equals("no")) {
+
+					String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+					PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+					System.out.println(
+							"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+					int agregarPart = input.nextInt();
+					input.nextLine();
+
+					System.out.println("Coloca el nombre de la parte que quieres agregar");
+					String agregarNombrePart = input.nextLine();
+
+					ps1.setInt(1, agregarPart);
+					ps1.setString(2, agregarNombrePart);
+
+					ps1.executeUpdate();
+					ps1.clearParameters();
+
+					System.out.println("Ahora puedes agregar la informacion sin problemas. ");
+					seguir2 = true;
+
+				} else if (pregunta2.equals("si")) {
+					System.out.println("Vamos a agregar los datos entonces. ");
+					seguir2 = true;
+				} else {
+					System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+				}
+
+			} while (seguir2 != true);
+
+			System.out.println(" ");
+			System.out.println("Introduce el numero de la parte: ");
+			int parte2 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre: ");
+			String nombre2 = input.nextLine();
+
+			System.out.println("Introduce el apellido: ");
+			String apellido2 = input.nextLine();
+
+			System.out.println("Introduce el valor de la edad: ");
+			int edad2 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre de la habilidad ");
+			String habilidad2 = input.nextLine();
+
+			System.out.println("Introduce el poder de la habilidad: ");
+			String poder2 = input.nextLine();
+
+			ps3.setInt(1, parte2);
+			ps3.setString(2, nombre2);
+			ps3.setString(3, apellido2);
+			ps3.setInt(4, edad2);
+			ps3.setString(5, habilidad2);
+			ps3.setString(6, poder2);
+
+			ps3.executeUpdate();
+			ps3.clearParameters();
+
+
 			break;
 		case 4:
-			consulta = "INSERT INTO parte (parte,nombre) "
-					+ "VALUES (?,?)";
+			consulta = "INSERT INTO parte (parte,nombre) " + "VALUES (?,?)";
 			PreparedStatement ps4 = conexion.prepareStatement(consulta);
-			ResultSet res4 = ps4.executeQuery();
+			
+			System.out.println(" ");
+			System.out.println("Introduce el numero de la parte: ");
+			int parte3 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre: ");
+			String nombre3 = input.nextLine();
+
+
+			ps4.setInt(1, parte3);
+			ps4.setString(2, nombre3);
+			
+		
+			ps4.executeUpdate();
+			ps4.clearParameters();
+
+			break;
+			
+		case 5:
+			consulta = "INSERT INTO Stand(parte,nombre,habilidad) " + "VALUES (?,?,?)";
+			PreparedStatement ps5 = conexion.prepareStatement(consulta);
+
+			System.out.println("¿La información que vas a agregar esta entre la parte (1-7)?  (SI/NO)");
+
+			String pregunta3 = input.nextLine().toLowerCase();
+			boolean seguir3 = false;
+
+			do {
+				if (pregunta3.equals("no")) {
+
+					String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+					PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+					System.out.println(
+							"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+					int agregarPart = input.nextInt();
+					input.nextLine();
+
+					System.out.println("Coloca el nombre de la parte que quieres agregar");
+					String agregarNombrePart = input.nextLine();
+
+					ps1.setInt(1, agregarPart);
+					ps1.setString(2, agregarNombrePart);
+
+					ps1.executeUpdate();
+					ps1.clearParameters();
+
+					System.out.println("Ahora puedes agregar la informacion sin problemas. ");
+					seguir3 = true;
+
+				} else if (pregunta3.equals("si")) {
+					System.out.println("Vamos a agregar los datos entonces. ");
+					seguir3 = true;
+				} else {
+					System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+				}
+
+			} while (seguir3 != true);
+
+			System.out.println(" ");
+			System.out.println("Introduce el numero de la parte: ");
+			int parte5 = input.nextInt();
+			input.nextLine();
+
+			System.out.println("Introduce el nombre: ");
+			String nombre5 = input.nextLine();
+
+			System.out.println("Introduce el nombre de la habilidad ");
+			String habilidad5 = input.nextLine();
+
+			
+			ps5.setInt(1, parte5);
+			ps5.setString(2, nombre5);
+			ps5.setString(3, habilidad5);
+			
+			ps5.executeUpdate();
+			ps5.clearParameters();
+
+			break;
+			
+		}
+
+	}
+	
+	public static void EliminarEnTabla(Connection conexion, Scanner input) throws SQLException {
+		String consulta = new String();
+		
+		final String menuInsertT =
+				 "Para eliminar tenermos las siguientes tablas:"
+				 + "\n1. Joestar"
+				 + "\n2. amigo"
+				 + "\n3. enemigos"
+				 + "\n4. parte"
+				 + "\n5. Stand";
+		
+		System.out.println(menuInsertT);
+		System.out.print("Elige una tabla: ");
+		int opcion = input.nextInt();
+		input.nextLine();
+		
+		switch(opcion){
+		case 1:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "1.parte"
+					+ "2.nombre"
+					+ "3.apellido"
+					+ "4.edad"
+					+ "5.habilidad"
+					+ "6.poder");
+			System.out.print("Opción: ");
+			int opcionDelete = input.nextInt();
+			switch(opcionDelete) {
+			
+			}
 			
 			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
 		case 5:
-			consulta = "INSERT INTO Stand(parte,nombre,habilidad) "
-					+ "VALUES (?,?,?)";
-			PreparedStatement ps5 = conexion.prepareStatement(consulta);
-			ResultSet res5 = ps5.executeQuery();
-			
 			break;
 		}
 		
+			consulta = "DELETE from Joestar(parte,nombre,apellido,edad,habilidad,poder) ";
+
+			PreparedStatement ps = conexion.prepareStatement(consulta);
+			
+			System.out.println(" ");
+			System.out.println("Introduce el numero de la parte: ");
+			int parte = input.nextInt();
+			input.nextLine();
+
+			ps.setInt(1, parte);
+			
+			ps.executeUpdate();
+			ps.clearParameters();
+
+			
 		
 	}
 }
