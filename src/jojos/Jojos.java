@@ -73,6 +73,7 @@ public class Jojos {
 					case 8:
 						break;
 					case 9:
+					Metodos.EliminarEnTabla(conexion, input);
 						break;
 					}
 				}

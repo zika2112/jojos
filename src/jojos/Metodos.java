@@ -168,6 +168,10 @@ public class Metodos {
 			
 		case 4:	
 			break;
+			
+		default:
+			System.out.println("Opcion erronea intenta de nuevo");
+			break;
 		}
 		
 
@@ -504,6 +508,9 @@ public class Metodos {
 
 			break;
 			
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
 		}
 
 	}
@@ -511,15 +518,15 @@ public class Metodos {
 	public static void EliminarEnTabla(Connection conexion, Scanner input) throws SQLException {
 		String consulta = new String();
 		
-		final String menuInsertT =
-				 "Para eliminar tenermos las siguientes tablas:"
+		final String menuDeleteT =
+				 "Para eliminar tenemos las siguientes tablas:"
 				 + "\n1. Joestar"
 				 + "\n2. amigo"
 				 + "\n3. enemigos"
 				 + "\n4. parte"
 				 + "\n5. Stand";
 		
-		System.out.println(menuInsertT);
+		System.out.println(menuDeleteT);
 		System.out.print("Elige una tabla: ");
 		int opcion = input.nextInt();
 		input.nextLine();
@@ -527,44 +534,384 @@ public class Metodos {
 		switch(opcion){
 		case 1:
 			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "1.parte"
-					+ "2.nombre"
-					+ "3.apellido"
-					+ "4.edad"
-					+ "5.habilidad"
-					+ "6.poder");
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder");
 			System.out.print("Opción: ");
 			int opcionDelete = input.nextInt();
+			input.nextLine();
+			
 			switch(opcionDelete) {
+			
+			case 1:
+				consulta = "DELETE FROM Joestar where parte = ?";
+				PreparedStatement ps = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el numero de la parte a eliminar: ");
+				int parteDelete = input.nextInt();
+				
+				ps.setInt(1, parteDelete);
+				
+				ps.executeUpdate();
+				ps.clearParameters();
+				
+				break;
+			case 2:
+				consulta = "DELETE FROM Joestar where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+				
+				ps2.setString(1, nombreDelete);
+				
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			case 3:
+				consulta = "DELETE FROM Joestar where apellido = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el apellido a eliminar: ");
+				String apellidoDelete = input.nextLine();
+				
+				ps3.setString(1, apellidoDelete);
+				
+				ps3.executeUpdate();
+				ps3.clearParameters();
+				break;
+			case 4:
+				consulta = "DELETE FROM Joestar where edad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca la edad a eliminar eliminar: ");
+				int edadDelete = input.nextInt();
+				
+				ps4.setInt(1, edadDelete);
+				
+				ps4.executeUpdate();
+				ps4.clearParameters();
+				break;
+			case 5:
+				consulta = "DELETE FROM Joestar where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+				
+				ps5.setString(1, habilidadDelete);
+				
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			case 6:
+				consulta = "DELETE FROM Joestar where poder = ?";
+				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
+				String poderDelete = input.nextLine();
+				
+				ps6.setString(1, poderDelete);
+				
+				ps6.executeUpdate();
+				ps6.clearParameters();
+				break;
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
 			
 			}
 			
 			break;
 		case 2:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder");
+			System.out.print("Opción: ");
+			int opcionDeleteAmigo = input.nextInt();
+			input.nextLine();
+			
+			switch(opcionDeleteAmigo) {
+			
+			case 1:
+				consulta = "DELETE FROM amigo where parte = ?";
+				PreparedStatement ps = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el numero de la parte a eliminar: ");
+				int parteDelete = input.nextInt();
+				
+				ps.setInt(1, parteDelete);
+				
+				ps.executeUpdate();
+				ps.clearParameters();
+				
+				break;
+			case 2:
+				consulta = "DELETE FROM amigo where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+				
+				ps2.setString(1, nombreDelete);
+				
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			case 3:
+				consulta = "DELETE FROM amigo where apellido = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el apellido a eliminar: ");
+				String apellidoDelete = input.nextLine();
+				
+				ps3.setString(1, apellidoDelete);
+				
+				ps3.executeUpdate();
+				ps3.clearParameters();
+				break;
+			case 4:
+				consulta = "DELETE FROM amigo where edad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca la edad a eliminar eliminar: ");
+				int edadDelete = input.nextInt();
+				
+				ps4.setInt(1, edadDelete);
+				
+				ps4.executeUpdate();
+				ps4.clearParameters();
+				break;
+			case 5:
+				consulta = "DELETE FROM amigo where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+				
+				ps5.setString(1, habilidadDelete);
+				
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			case 6:
+				consulta = "DELETE FROM amigo where poder = ?";
+				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
+				String poderDelete = input.nextLine();
+				
+				ps6.setString(1, poderDelete);
+				
+				ps6.executeUpdate();
+				ps6.clearParameters();
+				break;
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+			
+			}
 			break;
 		case 3:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder");
+			System.out.print("Opción: ");
+			int opcionDeleteEnemy = input.nextInt();
+			input.nextLine();
+			
+			switch(opcionDeleteEnemy) {
+			
+			case 1:
+				consulta = "DELETE FROM enemigo where parte = ?";
+				PreparedStatement ps = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el numero de la parte a eliminar: ");
+				int parteDelete = input.nextInt();
+				
+				ps.setInt(1, parteDelete);
+				
+				ps.executeUpdate();
+				ps.clearParameters();
+				
+				break;
+			case 2:
+				consulta = "DELETE FROM enemigo where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+				
+				ps2.setString(1, nombreDelete);
+				
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			case 3:
+				consulta = "DELETE FROM enemigo where apellido = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el apellido a eliminar: ");
+				String apellidoDelete = input.nextLine();
+				
+				ps3.setString(1, apellidoDelete);
+				
+				ps3.executeUpdate();
+				ps3.clearParameters();
+				break;
+			case 4:
+				consulta = "DELETE FROM enemigo where edad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca la edad a eliminar eliminar: ");
+				int edadDelete = input.nextInt();
+				
+				ps4.setInt(1, edadDelete);
+				
+				ps4.executeUpdate();
+				ps4.clearParameters();
+				break;
+			case 5:
+				consulta = "DELETE FROM enemigo where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+				
+				ps5.setString(1, habilidadDelete);
+				
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			case 6:
+				consulta = "DELETE FROM enemigo where poder = ?";
+				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
+				String poderDelete = input.nextLine();
+				
+				ps6.setString(1, poderDelete);
+				
+				ps6.executeUpdate();
+				ps6.clearParameters();
+				break;
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+			
+			}
+			
 			break;
 		case 4:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre");
+			System.out.print("Opción: ");
+			int opcionDeletePart = input.nextInt();
+			input.nextLine();
+			
+			switch(opcionDeletePart) {
+			
+			case 1:
+				consulta = "DELETE FROM parte where parte = ?";
+				PreparedStatement ps = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el numero de la parte a eliminar: ");
+				int parteDelete = input.nextInt();
+				
+				ps.setInt(1, parteDelete);
+				
+				ps.executeUpdate();
+				ps.clearParameters();
+				
+				break;
+			case 2:
+				consulta = "DELETE FROM parte where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+				
+				ps2.setString(1, nombreDelete);
+				
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+			
+			}
 			break;
 		case 5:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre"
+					+ "\n3.habilidad");
+			System.out.print("Opción: ");
+			int opcionDeleteStand = input.nextInt();
+			input.nextLine();
+			
+			switch(opcionDeleteStand) {
+			
+			case 1:
+				consulta = "DELETE FROM stand where parte = ?";
+				PreparedStatement ps = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el numero de la parte a eliminar: ");
+				int parteDelete = input.nextInt();
+				
+				ps.setInt(1, parteDelete);
+				
+				ps.executeUpdate();
+				ps.clearParameters();
+				
+				break;
+			case 2:
+				consulta = "DELETE FROM stand where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+				
+				ps2.setString(1, nombreDelete);
+				
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			
+			case 3:
+				consulta = "DELETE FROM stand where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+				
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+				
+				ps5.setString(1, habilidadDelete);
+				
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			}
+			break;
+		default:
+			System.out.println("Opcion erronea intenta de nuevo");
 			break;
 		}
 		
-			consulta = "DELETE from Joestar(parte,nombre,apellido,edad,habilidad,poder) ";
-
-			PreparedStatement ps = conexion.prepareStatement(consulta);
-			
-			System.out.println(" ");
-			System.out.println("Introduce el numero de la parte: ");
-			int parte = input.nextInt();
-			input.nextLine();
-
-			ps.setInt(1, parte);
-			
-			ps.executeUpdate();
-			ps.clearParameters();
-
-			
+			;
 		
 	}
 }
