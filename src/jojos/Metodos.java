@@ -515,7 +515,7 @@ public class Metodos {
 
 	}
 	
-	public static void EliminarEnTabla(Connection conexion, Scanner input) throws SQLException {
+	public static void EliminarEnTabla(Connection conexion, Scanner input,String adminPassword) throws SQLException {
 		String consulta = new String();
 		
 		final String menuDeleteT =
@@ -523,8 +523,7 @@ public class Metodos {
 				 + "\n1. Joestar"
 				 + "\n2. amigo"
 				 + "\n3. enemigos"
-				 + "\n4. parte"
-				 + "\n5. Stand";
+				 + "\n4. Stand";
 		
 		System.out.println(menuDeleteT);
 		System.out.print("Elige una tabla: ");
@@ -542,11 +541,18 @@ public class Metodos {
 					+ "\n6.poder");
 			System.out.print("Opción: ");
 			int opcionDelete = input.nextInt();
-			input.nextLine();
+			input.nextLine(); 
+			
 			
 			switch(opcionDelete) {
 			
 			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasar=input.nextLine();
+				
+				if(passwordPasar.equals(adminPassword)) {
+				
 				consulta = "DELETE FROM Joestar where parte = ?";
 				PreparedStatement ps = conexion.prepareStatement(consulta);
 				
@@ -557,6 +563,11 @@ public class Metodos {
 				
 				ps.executeUpdate();
 				ps.clearParameters();
+				
+				}else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
 				
 				break;
 			case 2:
@@ -641,6 +652,13 @@ public class Metodos {
 			switch(opcionDeleteAmigo) {
 			
 			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasar=input.nextLine();
+				
+				if(passwordPasar.equals(adminPassword)) {
+					
+				
 				consulta = "DELETE FROM amigo where parte = ?";
 				PreparedStatement ps = conexion.prepareStatement(consulta);
 				
@@ -651,6 +669,10 @@ public class Metodos {
 				
 				ps.executeUpdate();
 				ps.clearParameters();
+				}else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
 				
 				break;
 			case 2:
@@ -721,7 +743,7 @@ public class Metodos {
 			break;
 		case 3:
 			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
 					+ "\n2.nombre"
 					+ "\n3.apellido"
 					+ "\n4.edad"
@@ -734,6 +756,13 @@ public class Metodos {
 			switch(opcionDeleteEnemy) {
 			
 			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasar=input.nextLine();
+				
+				if(passwordPasar.equals(adminPassword)) {
+					
+				
 				consulta = "DELETE FROM enemigo where parte = ?";
 				PreparedStatement ps = conexion.prepareStatement(consulta);
 				
@@ -744,6 +773,10 @@ public class Metodos {
 				
 				ps.executeUpdate();
 				ps.clearParameters();
+				}else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
 				
 				break;
 			case 2:
@@ -811,53 +844,11 @@ public class Metodos {
 				break;
 			
 			}
-			
 			break;
+	
 		case 4:
 			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
-					+ "\n2.nombre");
-			System.out.print("Opción: ");
-			int opcionDeletePart = input.nextInt();
-			input.nextLine();
-			
-			switch(opcionDeletePart) {
-			
-			case 1:
-				consulta = "DELETE FROM parte where parte = ?";
-				PreparedStatement ps = conexion.prepareStatement(consulta);
-				
-				System.out.println("Coloca el numero de la parte a eliminar: ");
-				int parteDelete = input.nextInt();
-				
-				ps.setInt(1, parteDelete);
-				
-				ps.executeUpdate();
-				ps.clearParameters();
-				
-				break;
-			case 2:
-				consulta = "DELETE FROM parte where nombre = ?";
-				PreparedStatement ps2 = conexion.prepareStatement(consulta);
-				
-				System.out.println("Coloca el nombre a eliminar: ");
-				String nombreDelete = input.nextLine();
-				
-				ps2.setString(1, nombreDelete);
-				
-				ps2.executeUpdate();
-				ps2.clearParameters();
-				break;
-			
-			default:
-				System.out.println("Opcion erronea intenta de nuevo");
-				break;
-			
-			}
-			break;
-		case 5:
-			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
 					+ "\n2.nombre"
 					+ "\n3.habilidad");
 			System.out.print("Opción: ");
@@ -867,6 +858,13 @@ public class Metodos {
 			switch(opcionDeleteStand) {
 			
 			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasar=input.nextLine();
+				
+				if(passwordPasar.equals(adminPassword)) {
+					
+				
 				consulta = "DELETE FROM stand where parte = ?";
 				PreparedStatement ps = conexion.prepareStatement(consulta);
 				
@@ -877,6 +875,10 @@ public class Metodos {
 				
 				ps.executeUpdate();
 				ps.clearParameters();
+				}else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
 				
 				break;
 			case 2:
@@ -904,6 +906,10 @@ public class Metodos {
 				ps5.executeUpdate();
 				ps5.clearParameters();
 				break;
+				
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
 			}
 			break;
 		default:
@@ -913,5 +919,581 @@ public class Metodos {
 		
 			;
 		
+	}
+	public static void ModificarEnTabla(Connection conexion, Scanner input,String adminPassword) throws SQLException {
+		String consulta = new String();
+		
+		final String menuModifyT =
+				 "Para modificar tenemos las siguientes tablas:"
+				 + "\n1. Joestar"
+				 + "\n2. amigo"
+				 + "\n3. enemigos"
+				 + "\n4. Stand";
+		
+		System.out.println(menuModifyT);
+		System.out.print("Elige una tabla: ");
+		int opcion = input.nextInt();
+		input.nextLine();
+		
+		switch(opcion){
+		case 1:
+			System.out.println("Para modificar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si modificas la parte modificas el numero de la parte para toda la tabla que quieres cambiar)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder"
+					+ "\n7.Todos los valores");
+			System.out.print("Opción: ");
+			int opcionModify = input.nextInt();
+			input.nextLine(); 
+			
+			
+			switch (opcionModify) {
+
+			case 1:
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasar = input.nextLine();
+
+				if (passwordPasar.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
+
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							ps1.setInt(1, agregarPart);
+							ps1.setString(2, agregarNombrePart);
+
+							ps1.executeUpdate();
+							ps1.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+
+					consulta = "UPDATE joestar SET parte = ? WHERE parte = ?";
+					PreparedStatement ps = conexion.prepareStatement(consulta);
+
+					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
+					int parteModify = input.nextInt();
+
+					System.out.println("Coloca el numero de la parte a modificar");
+					int parteModificada = input.nextInt();
+
+					ps.setInt(1, parteModify);
+					ps.setInt(2, parteModificada);
+
+					ps.executeUpdate();
+					ps.clearParameters();
+
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
+
+				break;
+			case 2:
+				consulta = "UPDATE joestar SET nombre = ? WHERE nombre = ?";
+				PreparedStatement ps1 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre que deseas modificar ");
+				String nombreModify = input.nextLine();
+
+				System.out.println("Coloca el nombre a ser modificado");
+				String nombreModificada = input.nextLine();
+
+				ps1.setString(1, nombreModify);
+				ps1.setString(2, nombreModificada );
+
+				ps1.executeUpdate();
+				ps1.clearParameters();
+
+				break;
+			case 3:
+				consulta = "UPDATE joestar SET apellido = ? WHERE apellido = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el apellido que deseas modificar ");
+				String apellidoModify = input.nextLine();
+
+				System.out.println("Coloca el apellido a ser modificado");
+				String apellidoModificada = input.nextLine();
+
+				ps2.setString(1, apellidoModify);
+				ps2.setString(2, apellidoModificada );
+
+				ps2.executeUpdate();
+				ps2.clearParameters();
+
+				break;
+			case 4:
+				consulta = "UPDATE joestar SET edad = ? WHERE edad = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el numero de la edad a modificar que vas a poner ");
+				int edadModify = input.nextInt();
+
+				System.out.println("Coloca el numero de la edad a modificar");
+				int edadModificada = input.nextInt();
+
+				ps3.setInt(1, edadModify);
+				ps3.setInt(2, edadModificada);
+
+				ps3.executeUpdate();
+				ps3.clearParameters();
+
+				break;
+			case 5:
+				consulta = "UPDATE joestar SET habilidad = ? WHERE habilidad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el habilidad que deseas modificar ");
+				String habilidadModify = input.nextLine();
+
+				System.out.println("Coloca el habilidad a ser modificado");
+				String habilidadModificada = input.nextLine();
+
+				ps4.setString(1, habilidadModify);
+				ps4.setString(2, habilidadModificada );
+
+				ps4.executeUpdate();
+				ps4.clearParameters();
+
+				break;
+			case 6:
+				consulta = "UPDATE joestar SET poder = ? WHERE poder = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el poder que deseas modificar ");
+				String poderModify = input.nextLine();
+
+				System.out.println("Coloca el poder a ser modificado");
+				String poderModificada = input.nextLine();
+
+				ps5.setString(1, poderModify);
+				ps5.setString(2, poderModificada );
+
+				ps5.executeUpdate();
+				ps5.clearParameters();
+
+				break;
+				
+			case 7:
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasarT = input.nextLine();
+
+				if (passwordPasarT.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
+
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement pst = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							pst.setInt(1, agregarPart);
+							pst.setString(2, agregarNombrePart);
+
+							pst.executeUpdate();
+							pst.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+
+					consulta = "UPDATE joestar SET parte = ?,nombre = ?,apellido = ?,edad = ?,habilidad = ?,poder = ? WHERE parte = ?,nombre = ?,apellido = ?,edad = ?,habilidad = ?,poder = ?";
+					PreparedStatement ps6 = conexion.prepareStatement(consulta);
+
+					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
+					int parteModifyT = input.nextInt();
+					input.nextLine();
+					
+					System.out.println("Coloca el nombre que deseas modificar ");
+					String nombreModifyT = input.nextLine();
+					
+					System.out.println("Coloca el apellido que deseas modificar ");
+					String apellidoModifyT = input.nextLine();
+					
+					System.out.println("Coloca la edad a modificar que vas a poner ");
+					int edadModifyT = input.nextInt();
+					input.nextLine();
+					System.out.println("Coloca la habilidad que deseas modificar ");
+					String habilidadModifyT = input.nextLine();
+					
+					System.out.println("Coloca el poder que deseas modificar ");
+					String poderModifyT = input.nextLine();
+					
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                   MODIFICACIONES ARRIBA  ///  MODIFICADO ABAJO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+
+					System.out.println("Coloca el numero de la parte a modificar");
+					int parteModificadaT = input.nextInt();
+					input.nextLine();
+					
+					System.out.println("Coloca el nombre a ser modificado");
+					String nombreModificadaT = input.nextLine();
+					
+					System.out.println("Coloca el apellido a ser modificado");
+					String apellidoModificadaT = input.nextLine();
+					
+					System.out.println("Coloca la edad a modificar");
+					int edadModificadaT = input.nextInt();
+					input.nextLine();
+					
+					System.out.println("Coloca la habilidad a ser modificada");
+					String habilidadModificadaT = input.nextLine();
+					
+					System.out.println("Coloca el poder a ser modificado");
+					String poderModificadaT = input.nextLine();
+
+					ps6.setInt(1, parteModifyT);
+					ps6.setInt(2, parteModificadaT);
+					
+					ps6.setString(3, nombreModifyT);
+					ps6.setString(4, nombreModificadaT );
+					
+					ps6.setString(5, apellidoModifyT);
+					ps6.setString(6, apellidoModificadaT );
+					
+					ps6.setInt(7, edadModifyT);
+					ps6.setInt(8, edadModificadaT);
+					
+					ps6.setString(9, habilidadModifyT);
+					ps6.setString(10, habilidadModificadaT );
+					
+					ps6.setString(11, poderModifyT);
+					ps6.setString(12, poderModificadaT );
+					
+					ps6.executeUpdate();
+					ps6.clearParameters();
+
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
+				break;
+				
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+
+			}
+
+			break;
+		case 2:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre" + "\n3.apellido" + "\n4.edad" + "\n5.habilidad" + "\n6.poder");
+			System.out.print("Opción: ");
+			int opcionDeleteAmigo = input.nextInt();
+			input.nextLine();
+
+			switch (opcionDeleteAmigo) {
+
+			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String contraseñaPasar = input.nextLine();
+
+				if (contraseñaPasar.equals(adminPassword)) {
+
+					consulta = "DELETE FROM amigo where parte = ?";
+					PreparedStatement ps = conexion.prepareStatement(consulta);
+
+					System.out.println("Coloca el numero de la parte a eliminar: ");
+					int parteDelete = input.nextInt();
+
+					ps.setInt(1, parteDelete);
+
+					ps.executeUpdate();
+					ps.clearParameters();
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
+
+				break;
+			case 2:
+				consulta = "DELETE FROM amigo where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+
+				ps2.setString(1, nombreDelete);
+
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			case 3:
+				consulta = "DELETE FROM amigo where apellido = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el apellido a eliminar: ");
+				String apellidoDelete = input.nextLine();
+
+				ps3.setString(1, apellidoDelete);
+
+				ps3.executeUpdate();
+				ps3.clearParameters();
+				break;
+			case 4:
+				consulta = "DELETE FROM amigo where edad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca la edad a eliminar eliminar: ");
+				int edadDelete = input.nextInt();
+
+				ps4.setInt(1, edadDelete);
+
+				ps4.executeUpdate();
+				ps4.clearParameters();
+				break;
+			case 5:
+				consulta = "DELETE FROM amigo where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+
+				ps5.setString(1, habilidadDelete);
+
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			case 6:
+				consulta = "DELETE FROM amigo where poder = ?";
+				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
+				String poderDelete = input.nextLine();
+
+				ps6.setString(1, poderDelete);
+
+				ps6.executeUpdate();
+				ps6.clearParameters();
+				break;
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+
+			}
+			break;
+		case 3:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre" + "\n3.apellido" + "\n4.edad" + "\n5.habilidad" + "\n6.poder");
+			System.out.print("Opción: ");
+			int opcionDeleteEnemy = input.nextInt();
+			input.nextLine();
+
+			switch (opcionDeleteEnemy) {
+
+			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String contraseñaPasar = input.nextLine();
+
+				if (contraseñaPasar.equals(adminPassword)) {
+
+					consulta = "DELETE FROM enemigo where parte = ?";
+					PreparedStatement ps = conexion.prepareStatement(consulta);
+
+					System.out.println("Coloca el numero de la parte a eliminar: ");
+					int parteDelete = input.nextInt();
+
+					ps.setInt(1, parteDelete);
+
+					ps.executeUpdate();
+					ps.clearParameters();
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
+
+				break;
+			case 2:
+				consulta = "DELETE FROM enemigo where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+
+				ps2.setString(1, nombreDelete);
+
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+			case 3:
+				consulta = "DELETE FROM enemigo where apellido = ?";
+				PreparedStatement ps3 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el apellido a eliminar: ");
+				String apellidoDelete = input.nextLine();
+
+				ps3.setString(1, apellidoDelete);
+
+				ps3.executeUpdate();
+				ps3.clearParameters();
+				break;
+			case 4:
+				consulta = "DELETE FROM enemigo where edad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca la edad a eliminar eliminar: ");
+				int edadDelete = input.nextInt();
+
+				ps4.setInt(1, edadDelete);
+
+				ps4.executeUpdate();
+				ps4.clearParameters();
+				break;
+			case 5:
+				consulta = "DELETE FROM enemigo where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+
+				ps5.setString(1, habilidadDelete);
+
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+			case 6:
+				consulta = "DELETE FROM enemigo where poder = ?";
+				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
+				String poderDelete = input.nextLine();
+
+				ps6.setString(1, poderDelete);
+
+				ps6.executeUpdate();
+				ps6.clearParameters();
+				break;
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+
+			}
+			break;
+
+		case 4:
+			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
+					+ "\n2.nombre" + "\n3.habilidad");
+			System.out.print("Opción: ");
+			int opcionDeleteStand = input.nextInt();
+			input.nextLine();
+
+			switch (opcionDeleteStand) {
+
+			case 1:
+				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String contraseñaPasar = input.nextLine();
+
+				if (contraseñaPasar.equals(adminPassword)) {
+
+					consulta = "DELETE FROM stand where parte = ?";
+					PreparedStatement ps = conexion.prepareStatement(consulta);
+
+					System.out.println("Coloca el numero de la parte a eliminar: ");
+					int parteDelete = input.nextInt();
+
+					ps.setInt(1, parteDelete);
+
+					ps.executeUpdate();
+					ps.clearParameters();
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+				}
+
+				break;
+			case 2:
+				consulta = "DELETE FROM stand where nombre = ?";
+				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre a eliminar: ");
+				String nombreDelete = input.nextLine();
+
+				ps2.setString(1, nombreDelete);
+
+				ps2.executeUpdate();
+				ps2.clearParameters();
+				break;
+
+			case 3:
+				consulta = "DELETE FROM stand where habilidad = ?";
+				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
+				String habilidadDelete = input.nextLine();
+
+				ps5.setString(1, habilidadDelete);
+
+				ps5.executeUpdate();
+				ps5.clearParameters();
+				break;
+
+			default:
+				System.out.println("Opcion erronea intenta de nuevo");
+				break;
+			}
+			break;
+		default:
+			System.out.println("Opcion erronea intenta de nuevo");
+			break;
+		}
+
+		;
+
 	}
 }

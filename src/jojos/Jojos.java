@@ -17,9 +17,9 @@ public class Jojos {
 		String password = "";
 		String servidor = "jdbc:mysql://localhost:3306/";
 		Connection conexion = null;
-
+		
 		Scanner input = new Scanner(System.in);
-
+		String adminPassword="Nigerundayo";
 		try {
 			conexion = DriverManager.getConnection(servidor + bbdd, user, password);
 
@@ -58,7 +58,6 @@ public class Jojos {
 						Metodos.mostrarTabla4(conexion);
 						System.out.println();
 						break;
-
 					case 5:
 						Metodos.mostrarTabla5(conexion);
 						System.out.println();
@@ -71,9 +70,10 @@ public class Jojos {
 						Metodos.insertarEnTabla(conexion, input);
 						break;
 					case 8:
+						Metodos.ModificarEnTabla(conexion, input, adminPassword);
 						break;
 					case 9:
-					Metodos.EliminarEnTabla(conexion, input);
+					Metodos.EliminarEnTabla(conexion, input, adminPassword);
 						break;
 					}
 				}
