@@ -12,11 +12,11 @@ public class Metodos {
 	
 	public static void menu () {
 		final String menu =
-				 "1. Mostrar datos de tabla 1"
-				+ "\n2. Mostrar datos de tabla 2"
-				+ "\n3. Mostrar datos de tabla 3"
-				+ "\n4. Mostrar datos de tabla 4"
-				+ "\n5. Mostrar datos de tabla 5"
+				 "1. Mostrar datos de tabla Joestar"
+				+ "\n2. Mostrar datos de tabla amigo"
+				+ "\n3. Mostrar datos de tabla enemigos"
+				+ "\n4. Mostrar datos de tabla parte"
+				+ "\n5. Mostrar datos de tabla Stand"
 				+ "\n6. Mostrar datos de varias tablas"
 				+ "\n7. Insertar de datos en una tabla"
 				+ "\n8. Modificar datos de una tabla"
@@ -144,30 +144,94 @@ public class Metodos {
 		String consulta = new String();
 		final String menuVariasT =
 				 "1. Mostrar datos de 2 tablas"
-				+ "\n2. Mostrar datos de de 3 tablas"
-				+ "\n3. Mostrar datos de de 4 tablas"
-				+ "\n4. Mostrar datos de todas las tablas";
+				+ "\n2. Mostrar todas las tablas tablas";
+		final String menuVariasEleccion =
+				 "1. Tabla 1 "
+				+ "\n2. Tabla 2"
+				+ "\n3. Tabla 3"
+				+ "\n4. Tabla 4"
+				+ "\n5. Tabla 5";
 	
 		System.out.println(menuVariasT);
 		System.out.print("Opción: ");
 		int opcion = input.nextInt();	
-		
+		input.nextLine();
 		
 		switch(opcion) {
 		
 		case 1:
-			System.out.println("Selecciona el numero de la primera tabla");
-			consulta="Select * from amigo,joestar;";
-					
+			System.out.println(menuVariasEleccion);
+			System.out.println(" ");
+			
+			System.out.println("Indica la primera tabla a ver");
+			int tablaVer = input.nextInt();
+			
+			System.out.println("Indica la segunda tabla a ver");
+			int tablaVer2 = input.nextInt();
+			
+			switch(tablaVer) {
+			case 1:
+				Metodos.mostrarTabla1(conexion);
+				System.out.println(" ");
+				break;
+			case 2:
+				Metodos.mostrarTabla2(conexion);
+				System.out.println(" ");
+				break;
+			case 3:
+				Metodos.mostrarTabla3(conexion);
+				System.out.println(" ");
+				break;
+			case 4:
+				Metodos.mostrarTabla4(conexion);
+				System.out.println(" ");
+				break;
+			case 5:
+				Metodos.mostrarTabla5(conexion);
+				System.out.println(" ");
+				break;
+			default:
+				System.out.println("Opción invalida");
+			}
+			
+			switch(tablaVer2) {
+			case 1:
+				Metodos.mostrarTabla1(conexion);
+				System.out.println(" ");
+				break;
+			case 2:
+				Metodos.mostrarTabla2(conexion);
+				System.out.println(" ");
+				break;
+			case 3:
+				Metodos.mostrarTabla3(conexion);
+				System.out.println(" ");
+				break;
+			case 4:
+				Metodos.mostrarTabla4(conexion);
+				System.out.println(" ");
+				break;
+			case 5:
+				Metodos.mostrarTabla5(conexion);
+				System.out.println(" ");
+				break;
+			default:
+				System.out.println("Opción invalida");
+			}
 			break;
 			
 		case 2:
-			break;
 			
-		case 3:
-			break;
-			
-		case 4:	
+			System.out.println(" ");
+			Metodos.mostrarTabla1(conexion);
+			System.out.println(" ");
+			Metodos.mostrarTabla2(conexion);
+			System.out.println(" ");
+			Metodos.mostrarTabla3(conexion);
+			System.out.println(" ");
+			Metodos.mostrarTabla4(conexion);
+			System.out.println(" ");
+			Metodos.mostrarTabla5(conexion);
 			break;
 			
 		default:
@@ -175,20 +239,8 @@ public class Metodos {
 			break;
 		}
 		
-
-		PreparedStatement ps = conexion.prepareStatement(consulta);
-		ResultSet res = ps.executeQuery();
-		
-
-		
-		while (res.next()) {
-
-			System.out.println( res.getInt(1)+ res.getString(2)+ res.getString(3)+
-					res.getString(4)+ res.getString(5)+ res.getString(6));
-		}
-		
 	}
-	
+		
 	public static void insertarEnTabla(Connection conexion, Scanner input) throws SQLException {
 		String consulta = new String();
 		
@@ -1169,8 +1221,8 @@ public class Metodos {
 					System.out.println("Escribe el nombre de la segunda tabla que quieres corregir:");
 					String corregirTabla2 = input.nextLine();
 					
-					consulta = "UPDATE joestar SET "+corregirTabla1+" = ? "+corregirTabla2+" = ?"
-							+ " WHERE "+corregirTabla1+" = ? "+corregirTabla2+" = ?";
+					consulta = "UPDATE joestar SET "+corregirTabla1+" = ? ,"+corregirTabla2+" = ?"
+							+ " WHERE "+corregirTabla1+" = ? AND "+corregirTabla2+" = ?";
 					
 					PreparedStatement ps6 = conexion.prepareStatement(consulta);
 					
@@ -1238,12 +1290,12 @@ public class Metodos {
 						input.nextLine();
 						
 						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
-						String TextoModifyValor = input.nextLine();
+						String textoModifyValor = input.nextLine();
 						
-						//ps6.setInt(1, edadModifyT);
-						//ps6.setInt(2, edadModificadaT);
-						//ps6.setString(3, apellidoModifyT);
-						//ps6.setString(4, apellidoModificadaT);
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
 
 						ps6.executeUpdate();
 						ps6.clearParameters();
@@ -1253,30 +1305,29 @@ public class Metodos {
 						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
 						int numModifyValor = input.nextInt();
 						
-						
 						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
 						int num2ModifyValor = input.nextInt();
 						input.nextLine();
 						
-						//ps6.setInt(1, edadModifyT);
-						//ps6.setInt(2, edadModificadaT);
-						//ps6.setString(3, apellidoModifyT);
-						//ps6.setString(4, apellidoModificadaT);
+						ps6.setInt(1, numModifyT);
+						ps6.setInt(2, numModifyT2);
+						ps6.setInt(3, numModifyValor);
+						ps6.setInt(4, num2ModifyValor);
 
 						ps6.executeUpdate();
 						ps6.clearParameters();
 						
 					}else {
 						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
-						String TextoModifyValor = input.nextLine();
+						String textoModifyValor = input.nextLine();
 						
 						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
-						String Texto2ModifyValor = input.nextLine();
+						String textoModifyValor2 = input.nextLine();
 						
-						//ps6.setInt(1, edadModifyT);
-						//ps6.setInt(2, edadModificadaT);
-						//ps6.setString(3, apellidoModifyT);
-						//ps6.setString(4, apellidoModificadaT);
+						ps6.setString(1, textoModifyT);
+						ps6.setString(2, textoModifyT2);
+						ps6.setString(3, textoModifyValor);
+						ps6.setString(4, textoModifyValor2);
 
 						ps6.executeUpdate();
 						ps6.clearParameters();
@@ -1296,32 +1347,79 @@ public class Metodos {
 
 			break;
 		case 2:
-			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA(Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
-					+ "\n2.nombre" + "\n3.apellido" + "\n4.edad" + "\n5.habilidad" + "\n6.poder");
+			System.out.println("Para modificar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si modificas la parte modificas el numero de la parte para toda la tabla que quieres cambiar)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder"
+					+ "\n7.Corregir alguna modificación");
 			System.out.print("Opción: ");
-			int opcionDeleteAmigo = input.nextInt();
-			input.nextLine();
-
-			switch (opcionDeleteAmigo) {
+			int opcionModify2 = input.nextInt();
+			input.nextLine(); 
+			
+			
+			switch (opcionModify2) {
 
 			case 1:
-				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
 				System.out.print("Contraseña: ");
-				String contraseñaPasar = input.nextLine();
+				String passwordPasar = input.nextLine();
 
-				if (contraseñaPasar.equals(adminPassword)) {
+				if (passwordPasar.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
 
-					consulta = "DELETE FROM amigo where parte = ?";
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							ps1.setInt(1, agregarPart);
+							ps1.setString(2, agregarNombrePart);
+
+							ps1.executeUpdate();
+							ps1.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+
+					consulta = "UPDATE amigo SET parte = ? WHERE parte = ?";
 					PreparedStatement ps = conexion.prepareStatement(consulta);
 
-					System.out.println("Coloca el numero de la parte a eliminar: ");
-					int parteDelete = input.nextInt();
+					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
+					int parteModify = input.nextInt();
 
-					ps.setInt(1, parteDelete);
+					System.out.println("Coloca el numero de la parte a modificar");
+					int parteModificada = input.nextInt();
+
+					ps.setInt(1, parteModify);
+					ps.setInt(2, parteModificada);
 
 					ps.executeUpdate();
 					ps.clearParameters();
+
 				} else {
 					System.out.println("Contraseña invalida."
 							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
@@ -1329,65 +1427,260 @@ public class Metodos {
 
 				break;
 			case 2:
-				consulta = "DELETE FROM amigo where nombre = ?";
+				consulta = "UPDATE amigo SET nombre = ? WHERE nombre = ?";
+				PreparedStatement ps1 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre que deseas modificar ");
+				String nombreModify = input.nextLine();
+
+				System.out.println("Coloca el nombre a ser modificado");
+				String nombreModificada = input.nextLine();
+
+				ps1.setString(1, nombreModify);
+				ps1.setString(2, nombreModificada );
+
+				ps1.executeUpdate();
+				ps1.clearParameters();
+
+				break;
+			case 3:
+				consulta = "UPDATE amigo SET apellido = ? WHERE apellido = ?";
 				PreparedStatement ps2 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre a eliminar: ");
-				String nombreDelete = input.nextLine();
+				System.out.println("Coloca el apellido que deseas modificar ");
+				String apellidoModify = input.nextLine();
 
-				ps2.setString(1, nombreDelete);
+				System.out.println("Coloca el apellido a ser modificado");
+				String apellidoModificada = input.nextLine();
+
+				ps2.setString(1, apellidoModify);
+				ps2.setString(2, apellidoModificada );
 
 				ps2.executeUpdate();
 				ps2.clearParameters();
+
 				break;
-			case 3:
-				consulta = "DELETE FROM amigo where apellido = ?";
+			case 4:
+				consulta = "UPDATE amigo SET edad = ? WHERE edad = ?";
 				PreparedStatement ps3 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el apellido a eliminar: ");
-				String apellidoDelete = input.nextLine();
+				System.out.println("Coloca el numero de la edad a modificar que vas a poner ");
+				int edadModify = input.nextInt();
 
-				ps3.setString(1, apellidoDelete);
+				System.out.println("Coloca el numero de la edad a modificar");
+				int edadModificada = input.nextInt();
+
+				ps3.setInt(1, edadModify);
+				ps3.setInt(2, edadModificada);
 
 				ps3.executeUpdate();
 				ps3.clearParameters();
+
 				break;
-			case 4:
-				consulta = "DELETE FROM amigo where edad = ?";
+			case 5:
+				consulta = "UPDATE amigo SET habilidad = ? WHERE habilidad = ?";
 				PreparedStatement ps4 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca la edad a eliminar eliminar: ");
-				int edadDelete = input.nextInt();
+				System.out.println("Coloca el habilidad que deseas modificar ");
+				String habilidadModify = input.nextLine();
 
-				ps4.setInt(1, edadDelete);
+				System.out.println("Coloca el habilidad a ser modificado");
+				String habilidadModificada = input.nextLine();
+
+				ps4.setString(1, habilidadModify);
+				ps4.setString(2, habilidadModificada );
 
 				ps4.executeUpdate();
 				ps4.clearParameters();
+
 				break;
-			case 5:
-				consulta = "DELETE FROM amigo where habilidad = ?";
+			case 6:
+				consulta = "UPDATE amigo SET poder = ? WHERE poder = ?";
 				PreparedStatement ps5 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
-				String habilidadDelete = input.nextLine();
+				System.out.println("Coloca el poder que deseas modificar ");
+				String poderModify = input.nextLine();
 
-				ps5.setString(1, habilidadDelete);
+				System.out.println("Coloca el poder a ser modificado");
+				String poderModificada = input.nextLine();
+
+				ps5.setString(1, poderModify);
+				ps5.setString(2, poderModificada );
 
 				ps5.executeUpdate();
 				ps5.clearParameters();
+
 				break;
-			case 6:
-				consulta = "DELETE FROM amigo where poder = ?";
-				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+				
+			case 7:
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasarT = input.nextLine();
 
-				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
-				String poderDelete = input.nextLine();
+				if (passwordPasarT.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner, como el nuevo numero de la parte que deseas colocar esta entre las que la tabla *parte* posee ahora mismo?  (SI/NO)");
 
-				ps6.setString(1, poderDelete);
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
 
-				ps6.executeUpdate();
-				ps6.clearParameters();
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement pst = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							pst.setInt(1, agregarPart);
+							pst.setString(2, agregarNombrePart);
+
+							pst.executeUpdate();
+							pst.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							System.out.println(" ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+					
+					System.out.println("Solo podemos corregir datos de dos en dos a la vez."
+							+ "\nEscribe el nombre de la primera tabla que quieres corregir:");
+					String corregirTabla1 = input.nextLine();
+					
+					System.out.println("Escribe el nombre de la segunda tabla que quieres corregir:");
+					String corregirTabla2 = input.nextLine();
+					
+					consulta = "UPDATE amigo SET "+corregirTabla1+" = ? ,"+corregirTabla2+" = ?"
+							+ " WHERE "+corregirTabla1+" = ? AND "+corregirTabla2+" = ?";
+					
+					PreparedStatement ps6 = conexion.prepareStatement(consulta);
+					
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT2 = input.nextInt();
+						input.nextLine();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT2 = input.nextLine();	
+					}
+					
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                   MODIFICACIONES ARRIBA  ///  MODIFICADO ABAJO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+						
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int num2ModifyValor = input.nextInt();
+						input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setInt(2, numModifyT2);
+						ps6.setInt(3, numModifyValor);
+						ps6.setInt(4, num2ModifyValor);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor2 = input.nextLine();
+						
+						ps6.setString(1, textoModifyT);
+						ps6.setString(2, textoModifyT2);
+						ps6.setString(3, textoModifyValor);
+						ps6.setString(4, textoModifyValor2);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+					}
+					
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar.");
+				}
 				break;
+				
 			default:
 				System.out.println("Opcion erronea intenta de nuevo");
 				break;
@@ -1395,32 +1688,79 @@ public class Metodos {
 			}
 			break;
 		case 3:
-			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
-					+ "\n2.nombre" + "\n3.apellido" + "\n4.edad" + "\n5.habilidad" + "\n6.poder");
+			System.out.println("Para modificar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si modificas la parte modificas el numero de la parte para toda la tabla que quieres cambiar)"
+					+ "\n2.nombre"
+					+ "\n3.apellido"
+					+ "\n4.edad"
+					+ "\n5.habilidad"
+					+ "\n6.poder"
+					+ "\n7.Corregir alguna modificación");
 			System.out.print("Opción: ");
-			int opcionDeleteEnemy = input.nextInt();
-			input.nextLine();
-
-			switch (opcionDeleteEnemy) {
+			int opcionModify3 = input.nextInt();
+			input.nextLine(); 
+			
+			
+			switch (opcionModify3) {
 
 			case 1:
-				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
 				System.out.print("Contraseña: ");
-				String contraseñaPasar = input.nextLine();
+				String passwordPasar = input.nextLine();
 
-				if (contraseñaPasar.equals(adminPassword)) {
+				if (passwordPasar.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
 
-					consulta = "DELETE FROM enemigo where parte = ?";
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							ps1.setInt(1, agregarPart);
+							ps1.setString(2, agregarNombrePart);
+
+							ps1.executeUpdate();
+							ps1.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+
+					consulta = "UPDATE enemigos SET parte = ? WHERE parte = ?";
 					PreparedStatement ps = conexion.prepareStatement(consulta);
 
-					System.out.println("Coloca el numero de la parte a eliminar: ");
-					int parteDelete = input.nextInt();
+					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
+					int parteModify = input.nextInt();
 
-					ps.setInt(1, parteDelete);
+					System.out.println("Coloca el numero de la parte a modificar");
+					int parteModificada = input.nextInt();
+
+					ps.setInt(1, parteModify);
+					ps.setInt(2, parteModificada);
 
 					ps.executeUpdate();
 					ps.clearParameters();
+
 				} else {
 					System.out.println("Contraseña invalida."
 							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
@@ -1428,65 +1768,260 @@ public class Metodos {
 
 				break;
 			case 2:
-				consulta = "DELETE FROM enemigo where nombre = ?";
+				consulta = "UPDATE enemigos SET nombre = ? WHERE nombre = ?";
+				PreparedStatement ps1 = conexion.prepareStatement(consulta);
+
+				System.out.println("Coloca el nombre que deseas modificar ");
+				String nombreModify = input.nextLine();
+
+				System.out.println("Coloca el nombre a ser modificado");
+				String nombreModificada = input.nextLine();
+
+				ps1.setString(1, nombreModify);
+				ps1.setString(2, nombreModificada );
+
+				ps1.executeUpdate();
+				ps1.clearParameters();
+
+				break;
+			case 3:
+				consulta = "UPDATE enemigos SET apellido = ? WHERE apellido = ?";
 				PreparedStatement ps2 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre a eliminar: ");
-				String nombreDelete = input.nextLine();
+				System.out.println("Coloca el apellido que deseas modificar ");
+				String apellidoModify = input.nextLine();
 
-				ps2.setString(1, nombreDelete);
+				System.out.println("Coloca el apellido a ser modificado");
+				String apellidoModificada = input.nextLine();
+
+				ps2.setString(1, apellidoModify);
+				ps2.setString(2, apellidoModificada );
 
 				ps2.executeUpdate();
 				ps2.clearParameters();
+
 				break;
-			case 3:
-				consulta = "DELETE FROM enemigo where apellido = ?";
+			case 4:
+				consulta = "UPDATE enemigos SET edad = ? WHERE edad = ?";
 				PreparedStatement ps3 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el apellido a eliminar: ");
-				String apellidoDelete = input.nextLine();
+				System.out.println("Coloca el numero de la edad a modificar que vas a poner ");
+				int edadModify = input.nextInt();
 
-				ps3.setString(1, apellidoDelete);
+				System.out.println("Coloca el numero de la edad a modificar");
+				int edadModificada = input.nextInt();
+
+				ps3.setInt(1, edadModify);
+				ps3.setInt(2, edadModificada);
 
 				ps3.executeUpdate();
 				ps3.clearParameters();
+
 				break;
-			case 4:
-				consulta = "DELETE FROM enemigo where edad = ?";
+			case 5:
+				consulta = "UPDATE enemigos SET habilidad = ? WHERE habilidad = ?";
 				PreparedStatement ps4 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca la edad a eliminar eliminar: ");
-				int edadDelete = input.nextInt();
+				System.out.println("Coloca el habilidad que deseas modificar ");
+				String habilidadModify = input.nextLine();
 
-				ps4.setInt(1, edadDelete);
+				System.out.println("Coloca el habilidad a ser modificado");
+				String habilidadModificada = input.nextLine();
+
+				ps4.setString(1, habilidadModify);
+				ps4.setString(2, habilidadModificada );
 
 				ps4.executeUpdate();
 				ps4.clearParameters();
+
 				break;
-			case 5:
-				consulta = "DELETE FROM enemigo where habilidad = ?";
+			case 6:
+				consulta = "UPDATE enemigos SET poder = ? WHERE poder = ?";
 				PreparedStatement ps5 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
-				String habilidadDelete = input.nextLine();
+				System.out.println("Coloca el poder que deseas modificar ");
+				String poderModify = input.nextLine();
 
-				ps5.setString(1, habilidadDelete);
+				System.out.println("Coloca el poder a ser modificado");
+				String poderModificada = input.nextLine();
+
+				ps5.setString(1, poderModify);
+				ps5.setString(2, poderModificada );
 
 				ps5.executeUpdate();
 				ps5.clearParameters();
+
 				break;
-			case 6:
-				consulta = "DELETE FROM enemigo where poder = ?";
-				PreparedStatement ps6 = conexion.prepareStatement(consulta);
+				
+			case 7:
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasarT = input.nextLine();
 
-				System.out.println("Coloca el nombre del poder a eliminar eliminar: ");
-				String poderDelete = input.nextLine();
+				if (passwordPasarT.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner, como el nuevo numero de la parte que deseas colocar esta entre las que la tabla *parte* posee ahora mismo?  (SI/NO)");
 
-				ps6.setString(1, poderDelete);
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
 
-				ps6.executeUpdate();
-				ps6.clearParameters();
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement pst = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							pst.setInt(1, agregarPart);
+							pst.setString(2, agregarNombrePart);
+
+							pst.executeUpdate();
+							pst.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							System.out.println(" ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+					
+					System.out.println("Solo podemos corregir datos de dos en dos a la vez."
+							+ "\nEscribe el nombre de la primera tabla que quieres corregir:");
+					String corregirTabla1 = input.nextLine();
+					
+					System.out.println("Escribe el nombre de la segunda tabla que quieres corregir:");
+					String corregirTabla2 = input.nextLine();
+					
+					consulta = "UPDATE enemigos SET "+corregirTabla1+" = ? ,"+corregirTabla2+" = ?"
+							+ " WHERE "+corregirTabla1+" = ? AND "+corregirTabla2+" = ?";
+					
+					PreparedStatement ps6 = conexion.prepareStatement(consulta);
+					
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT2 = input.nextInt();
+						input.nextLine();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT2 = input.nextLine();	
+					}
+					
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                   MODIFICACIONES ARRIBA  ///  MODIFICADO ABAJO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+						
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int num2ModifyValor = input.nextInt();
+						input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setInt(2, numModifyT2);
+						ps6.setInt(3, numModifyValor);
+						ps6.setInt(4, num2ModifyValor);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor2 = input.nextLine();
+						
+						ps6.setString(1, textoModifyT);
+						ps6.setString(2, textoModifyT2);
+						ps6.setString(3, textoModifyValor);
+						ps6.setString(4, textoModifyValor2);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+					}
+					
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar.");
+				}
 				break;
+				
 			default:
 				System.out.println("Opcion erronea intenta de nuevo");
 				break;
@@ -1495,32 +2030,76 @@ public class Metodos {
 			break;
 
 		case 4:
-			System.out.println("Para eliminar tenemos los siguientes datos por esta tabla "
-					+ "\n1.parte. ADVERTENCIA (Si eliminas la parte eliminas todos los datos de dicha parte en esta tabla)"
-					+ "\n2.nombre" + "\n3.habilidad");
+			System.out.println("Para modificar tenemos los siguientes datos por esta tabla "
+					+ "\n1.parte. ADVERTENCIA(Si modificas la parte modificas el numero de la parte para toda la tabla que quieres cambiar)"
+					+ "\n2.nombre"
+					+ "\n3.habilidad"
+					+ "\n4.Corregir alguna modificación");
 			System.out.print("Opción: ");
-			int opcionDeleteStand = input.nextInt();
-			input.nextLine();
-
-			switch (opcionDeleteStand) {
+			int opcionModify4 = input.nextInt();
+			input.nextLine(); 
+			
+			
+			switch (opcionModify4) {
 
 			case 1:
-				System.out.println("Para eliminar este valor necesitamos la contraseña de administrador");
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
 				System.out.print("Contraseña: ");
-				String contraseñaPasar = input.nextLine();
+				String passwordPasar = input.nextLine();
 
-				if (contraseñaPasar.equals(adminPassword)) {
+				if (passwordPasar.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
 
-					consulta = "DELETE FROM stand where parte = ?";
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement ps1 = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							ps1.setInt(1, agregarPart);
+							ps1.setString(2, agregarNombrePart);
+
+							ps1.executeUpdate();
+							ps1.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+
+					consulta = "UPDATE stand SET parte = ? WHERE parte = ?";
 					PreparedStatement ps = conexion.prepareStatement(consulta);
 
-					System.out.println("Coloca el numero de la parte a eliminar: ");
-					int parteDelete = input.nextInt();
+					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
+					int parteModify = input.nextInt();
 
-					ps.setInt(1, parteDelete);
+					System.out.println("Coloca el numero de la parte a modificar");
+					int parteModificada = input.nextInt();
+
+					ps.setInt(1, parteModify);
+					ps.setInt(2, parteModificada);
 
 					ps.executeUpdate();
 					ps.clearParameters();
+
 				} else {
 					System.out.println("Contraseña invalida."
 							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
@@ -1528,36 +2107,189 @@ public class Metodos {
 
 				break;
 			case 2:
-				consulta = "DELETE FROM stand where nombre = ?";
-				PreparedStatement ps2 = conexion.prepareStatement(consulta);
+				consulta = "UPDATE stand SET nombre = ? WHERE nombre = ?";
+				PreparedStatement ps1 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre a eliminar: ");
-				String nombreDelete = input.nextLine();
+				System.out.println("Coloca el nombre que deseas modificar ");
+				String nombreModify = input.nextLine();
 
-				ps2.setString(1, nombreDelete);
+				System.out.println("Coloca el nombre a ser modificado");
+				String nombreModificada = input.nextLine();
 
-				ps2.executeUpdate();
-				ps2.clearParameters();
+				ps1.setString(1, nombreModify);
+				ps1.setString(2, nombreModificada );
+
+				ps1.executeUpdate();
+				ps1.clearParameters();
+
 				break;
-
 			case 3:
-				consulta = "DELETE FROM stand where habilidad = ?";
-				PreparedStatement ps5 = conexion.prepareStatement(consulta);
+				consulta = "UPDATE stand SET habilidad = ? WHERE habilidad = ?";
+				PreparedStatement ps4 = conexion.prepareStatement(consulta);
 
-				System.out.println("Coloca el nombre de la habilidad a eliminar: ");
-				String habilidadDelete = input.nextLine();
+				System.out.println("Coloca el habilidad que deseas modificar ");
+				String habilidadModify = input.nextLine();
 
-				ps5.setString(1, habilidadDelete);
+				System.out.println("Coloca el habilidad a ser modificado");
+				String habilidadModificada = input.nextLine();
 
-				ps5.executeUpdate();
-				ps5.clearParameters();
+				ps4.setString(1, habilidadModify);
+				ps4.setString(2, habilidadModificada );
+
+				ps4.executeUpdate();
+				ps4.clearParameters();
+
 				break;
+			
+			case 4:
+				System.out.println("Para Modificar este valor necesitamos la contraseña de administrador");
+				System.out.print("Contraseña: ");
+				String passwordPasarT = input.nextLine();
 
+				if (passwordPasarT.equals(adminPassword)) {
+					System.out.println("¿El numero de la parte que quieres poner, como el nuevo numero de la parte que deseas colocar esta entre las que la tabla *parte* posee ahora mismo?  (SI/NO)");
+
+					String pregunta3 = input.nextLine().toLowerCase();
+					boolean seguir3 = false;
+
+					do {
+						if (pregunta3.equals("no")) {
+
+							String consultaP = "INSERT INTO parte(parte,nombre) " + "VALUES (?,?)";
+							PreparedStatement pst = conexion.prepareStatement(consultaP);
+
+							System.out.println(
+									"Indica la parte que de la cual es la informacion para poder agregar la: (numero)");
+							int agregarPart = input.nextInt();
+							input.nextLine();
+
+							System.out.println("Coloca el nombre de la parte que quieres agregar");
+							String agregarNombrePart = input.nextLine();
+
+							pst.setInt(1, agregarPart);
+							pst.setString(2, agregarNombrePart);
+
+							pst.executeUpdate();
+							pst.clearParameters();
+
+							System.out.println("Ahora puedes agregar la modificacion sin problemas. ");
+							seguir3 = true;
+
+						} else if (pregunta3.equals("si")) {
+							System.out.println("Vamos a agregar los datos entonces. ");
+							System.out.println(" ");
+							seguir3 = true;
+						} else {
+							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
+						}
+
+					} while (seguir3 != true);
+					
+					System.out.println("Solo podemos corregir datos de dos en dos a la vez."
+							+ "\nEscribe el nombre de la primera tabla que quieres corregir:");
+					String corregirTabla1 = input.nextLine();
+					
+					System.out.println("Escribe el nombre de la segunda tabla que quieres corregir:");
+					String corregirTabla2 = input.nextLine();
+					
+					consulta = "UPDATE stand SET "+corregirTabla1+" = ? ,"+corregirTabla2+" = ?"
+							+ " WHERE "+corregirTabla1+" = ? AND "+corregirTabla2+" = ?";
+					
+					PreparedStatement ps6 = conexion.prepareStatement(consulta);
+					
+					if(corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if(corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						 
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT2 = input.nextLine();	
+					}
+					
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                   MODIFICACIONES ARRIBA  ///  MODIFICADO ABAJO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+
+					if(corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+						
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if(corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor2 = input.nextLine();
+						
+						ps6.setString(1, textoModifyT);
+						ps6.setString(2, textoModifyT2);
+						ps6.setString(3, textoModifyValor);
+						ps6.setString(4, textoModifyValor2);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+					}
+					
+				} else {
+					System.out.println("Contraseña invalida."
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar.");
+				}
+				break;
+			
 			default:
 				System.out.println("Opcion erronea intenta de nuevo");
 				break;
+
 			}
 			break;
+		
 		default:
 			System.out.println("Opcion erronea intenta de nuevo");
 			break;
