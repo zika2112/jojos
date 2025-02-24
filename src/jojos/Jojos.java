@@ -62,18 +62,21 @@ public class Jojos {
 						Metodos.mostrarTabla5(conexion);
 						System.out.println();
 						break;
-						
 					case 6:
 						Metodos.mostrarVariasTablas(conexion, input);
+						System.out.println();
 						break;
 					case 7:
 						Metodos.insertarEnTabla(conexion, input);
+						System.out.println();
 						break;
 					case 8:
 						Metodos.ModificarEnTabla(conexion, input, adminPassword);
+						System.out.println();
 						break;
 					case 9:
 					Metodos.EliminarEnTabla(conexion, input, adminPassword);
+					System.out.println();
 						break;
 					}
 				}
@@ -87,6 +90,5 @@ public class Jojos {
 			sqle.printStackTrace();
 
 		}
-
 	}
 }

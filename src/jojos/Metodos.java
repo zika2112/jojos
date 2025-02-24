@@ -138,6 +138,7 @@ public class Metodos {
 		}
 		
 	}
+	
 	public static void mostrarVariasTablas(Connection conexion,Scanner input) throws SQLException {
 		
 		String consulta = new String();
@@ -177,7 +178,7 @@ public class Metodos {
 
 		PreparedStatement ps = conexion.prepareStatement(consulta);
 		ResultSet res = ps.executeQuery();
-		ResultSetMetaData rmd = res.getMetaData();
+		
 
 		
 		while (res.next()) {
@@ -920,8 +921,14 @@ public class Metodos {
 			;
 		
 	}
+	
 	public static void ModificarEnTabla(Connection conexion, Scanner input,String adminPassword) throws SQLException {
 		String consulta = new String();
+		
+		int numModifyT = 0;
+		int numModifyT2 = 0;
+		String textoModifyT = new String();
+		String textoModifyT2 = new String();
 		
 		final String menuModifyT =
 				 "Para modificar tenemos las siguientes tablas:"
@@ -929,6 +936,15 @@ public class Metodos {
 				 + "\n2. amigo"
 				 + "\n3. enemigos"
 				 + "\n4. Stand";
+		
+		final String menuCorregir =
+				 "Para modificar tenemos las siguientes datos en esta tabla:"
+				 + "\n1.parte"
+				 + "\n2.nombre"
+				 + "\n3.apellido"
+				 + "\n4.edad"
+				 + "\n5.habilidad"
+				 + "\n6.poder";
 		
 		System.out.println(menuModifyT);
 		System.out.print("Elige una tabla: ");
@@ -944,7 +960,7 @@ public class Metodos {
 					+ "\n4.edad"
 					+ "\n5.habilidad"
 					+ "\n6.poder"
-					+ "\n7.Todos los valores");
+					+ "\n7.Corregir alguna modificación");
 			System.out.print("Opción: ");
 			int opcionModify = input.nextInt();
 			input.nextLine(); 
@@ -1108,7 +1124,7 @@ public class Metodos {
 				String passwordPasarT = input.nextLine();
 
 				if (passwordPasarT.equals(adminPassword)) {
-					System.out.println("¿El numero de la parte que quieres poner como el nuevo numero de la parte esta entre las que la tabla posee ahora mismo?  (SI/NO)");
+					System.out.println("¿El numero de la parte que quieres poner, como el nuevo numero de la parte que deseas colocar esta entre las que la tabla *parte* posee ahora mismo?  (SI/NO)");
 
 					String pregunta3 = input.nextLine().toLowerCase();
 					boolean seguir3 = false;
@@ -1138,83 +1154,137 @@ public class Metodos {
 
 						} else if (pregunta3.equals("si")) {
 							System.out.println("Vamos a agregar los datos entonces. ");
+							System.out.println(" ");
 							seguir3 = true;
 						} else {
 							System.out.println("La opcion no es valida vuelve a intentar (SI/NO)");
 						}
 
 					} while (seguir3 != true);
-
-					consulta = "UPDATE joestar SET parte = ?,nombre = ?,apellido = ?,edad = ?,habilidad = ?,poder = ? WHERE parte = ?,nombre = ?,apellido = ?,edad = ?,habilidad = ?,poder = ?";
+					
+					System.out.println("Solo podemos corregir datos de dos en dos a la vez."
+							+ "\nEscribe el nombre de la primera tabla que quieres corregir:");
+					String corregirTabla1 = input.nextLine();
+					
+					System.out.println("Escribe el nombre de la segunda tabla que quieres corregir:");
+					String corregirTabla2 = input.nextLine();
+					
+					consulta = "UPDATE joestar SET "+corregirTabla1+" = ? "+corregirTabla2+" = ?"
+							+ " WHERE "+corregirTabla1+" = ? "+corregirTabla2+" = ?";
+					
 					PreparedStatement ps6 = conexion.prepareStatement(consulta);
-
-					System.out.println("Coloca el numero de la parte a modificar que vas a poner ");
-					int parteModifyT = input.nextInt();
-					input.nextLine();
 					
-					System.out.println("Coloca el nombre que deseas modificar ");
-					String nombreModifyT = input.nextLine();
-					
-					System.out.println("Coloca el apellido que deseas modificar ");
-					String apellidoModifyT = input.nextLine();
-					
-					System.out.println("Coloca la edad a modificar que vas a poner ");
-					int edadModifyT = input.nextInt();
-					input.nextLine();
-					System.out.println("Coloca la habilidad que deseas modificar ");
-					String habilidadModifyT = input.nextLine();
-					
-					System.out.println("Coloca el poder que deseas modificar ");
-					String poderModifyT = input.nextLine();
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" a modificar que vas a poner: ");
+						 numModifyT = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" a modificar que vas a poner: ");
+						 numModifyT2 = input.nextInt();
+						input.nextLine();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que deseas modificar: ");
+						 textoModifyT = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que deseas modificar: ");
+						 textoModifyT2 = input.nextLine();	
+					}
 					
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                   MODIFICACIONES ARRIBA  ///  MODIFICADO ABAJO
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
 
-					System.out.println("Coloca el numero de la parte a modificar");
-					int parteModificadaT = input.nextInt();
-					input.nextLine();
-					
-					System.out.println("Coloca el nombre a ser modificado");
-					String nombreModificadaT = input.nextLine();
-					
-					System.out.println("Coloca el apellido a ser modificado");
-					String apellidoModificadaT = input.nextLine();
-					
-					System.out.println("Coloca la edad a modificar");
-					int edadModificadaT = input.nextInt();
-					input.nextLine();
-					
-					System.out.println("Coloca la habilidad a ser modificada");
-					String habilidadModificadaT = input.nextLine();
-					
-					System.out.println("Coloca el poder a ser modificado");
-					String poderModificadaT = input.nextLine();
+					if(corregirTabla1.equals("edad") ||corregirTabla1.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String textoModifyValor = input.nextLine();
+						
+						ps6.setInt(1, numModifyT);
+						ps6.setString(2, textoModifyT);
+						ps6.setInt(3, numModifyValor);
+						ps6.setString(4, textoModifyValor);
+						
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if(corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String TextoModifyValor = input.nextLine();
+						
+						//ps6.setInt(1, edadModifyT);
+						//ps6.setInt(2, edadModificadaT);
+						//ps6.setString(3, apellidoModifyT);
+						//ps6.setString(4, apellidoModificadaT);
 
-					ps6.setInt(1, parteModifyT);
-					ps6.setInt(2, parteModificadaT);
-					
-					ps6.setString(3, nombreModifyT);
-					ps6.setString(4, nombreModificadaT );
-					
-					ps6.setString(5, apellidoModifyT);
-					ps6.setString(6, apellidoModificadaT );
-					
-					ps6.setInt(7, edadModifyT);
-					ps6.setInt(8, edadModificadaT);
-					
-					ps6.setString(9, habilidadModifyT);
-					ps6.setString(10, habilidadModificadaT );
-					
-					ps6.setString(11, poderModifyT);
-					ps6.setString(12, poderModificadaT );
-					
-					ps6.executeUpdate();
-					ps6.clearParameters();
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else if (corregirTabla1.equals("edad") || corregirTabla1.equals("parte") && corregirTabla2.equals("edad") ||corregirTabla2.equals("parte")) {
+						
+						System.out.println("Coloca el numero de la "+corregirTabla1+" que quieres cambiar: ");
+						int numModifyValor = input.nextInt();
+						
+						
+						System.out.println("Coloca el numero de la "+corregirTabla2+" que quieres cambiar: ");
+						int num2ModifyValor = input.nextInt();
+						input.nextLine();
+						
+						//ps6.setInt(1, edadModifyT);
+						//ps6.setInt(2, edadModificadaT);
+						//ps6.setString(3, apellidoModifyT);
+						//ps6.setString(4, apellidoModificadaT);
 
+						ps6.executeUpdate();
+						ps6.clearParameters();
+						
+					}else {
+						System.out.println("Coloca el "+corregirTabla1+" que vamos a reemplazar por el nuevo dato: ");
+						String TextoModifyValor = input.nextLine();
+						
+						System.out.println("Coloca el "+corregirTabla2+" que vamos a reemplazar por el nuevo dato: ");
+						String Texto2ModifyValor = input.nextLine();
+						
+						//ps6.setInt(1, edadModifyT);
+						//ps6.setInt(2, edadModificadaT);
+						//ps6.setString(3, apellidoModifyT);
+						//ps6.setString(4, apellidoModificadaT);
+
+						ps6.executeUpdate();
+						ps6.clearParameters();
+					}
+					
 				} else {
 					System.out.println("Contraseña invalida."
-							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar");
+							+ "\nContacte con Joseph Joestar para aprender la tecnica secreta joestar.");
 				}
 				break;
 				
@@ -1493,7 +1563,6 @@ public class Metodos {
 			break;
 		}
 
-		;
-
+	
 	}
 }
